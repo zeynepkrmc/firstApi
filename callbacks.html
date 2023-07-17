@@ -12,11 +12,57 @@
         //create post
         //order
         //making ready the order
+        console.log("start");
+
+        const serverStatus = true;
+
+        const login = (username, password, succesFn, errorFn) => {
+            setTimeout(() => {
+                if(serverStatus){
+                succesFn({ username: username, email:"user@gmail.com"})
+                } else {
+                    errorFn("server closed");
+                }
+            }, 1000);
+        }
+
+         const getPostsByUsername = (username, succesFn) => {
+             setTimeout(() => {
+                 succesFn(["post 1", "post 2","post 3"]);
+             },2000)
+         }
+
+         const getPostDetails = (username, succesFn) => {
+             setTimeout(() => {
+                 succesFn(["post 1", "post 2","post 3"]);
+             }, 1000)
+         }
+         
+    
+         login("USER","12345", user => {
+            console.log(user.name);
+
+            getPostsByUsername(user.username, (posts) => {
+                console.log(posts);
+
+                getPostDetails(posts[0], (details) => {
+                    console.log(details);
+                })
+            });
+            
+         },(error) => {
+            console.log(error);
+         }); //sending error here with below function is possible
+
+        //  function error (msg){
+        //     console.log(msg);
+        //  }
 
 
-          login = {username, passwoerrd}
+         //callback hell
+
+         console.log("end");
+
     </script>
-    
-    
 </body>
 </html>
