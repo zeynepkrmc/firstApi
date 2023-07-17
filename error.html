@@ -10,6 +10,9 @@
         .col-2 img{
             height: 120px;
         }
+        #details {
+            opacity: 0;
+        }
     </style>
 </head>
 <body>
@@ -23,15 +26,21 @@
                 </div>
             </div>
         </div>
-        <div class="card mb-3" id="country-details">
-        </div>
+        <div class="details">
         <div class="card mb-3">
+            <div class="card-header">Result of search</div>
+            <div class="card-body">
+                <div class="row" id="country-details">
+                </div>
+                </div>
+            </div>
             <div class="card-header">Neighbour Countries</div>
             <div class="card-body">
                 <div class="row" id="neighbours">
 
                 </div>
             </div>
+        </div>
         </div>
     </div>
 <!--xml, json-->
@@ -40,6 +49,7 @@
 <script>
     document.querySelector("#btnSearch").addEventListener("click", () => {
         let text = document.querySelector("#txtSearch").value;
+        document.querySelector("#details").style.opacity = 0;
         getCountry(text);
     });
     
@@ -54,8 +64,11 @@
         .then((data) => { 
             console.log
             renderCountry(data[0]);
-            const countries = data[0].borders.toString();
+            const countries = data[0].borders;
 
+            if(!countries)
+                throw new Error("No neighbour country");
+                
             return fetch('https://restcountries.com/v3.1/alpha?codes=' + countries);
         })
         .then(data => { //.then(data => return response.json())
@@ -68,12 +81,12 @@
     }
 
     function renderCountry(data){
+        document.querySelector("#country-details").innerHTML = "";
+        document.querySelector("#neighbours").innerHTML = "";
+
       
-    let html = `<div class="card-header">
-                Result
-            </div>
-            <div class="card-body">
-                <div class="row">
+        let html = `
+            
                     <div class="col-4">
                         <img src="${data.flags.png}" alt="" class="img-fluid">
                     </div>
@@ -96,9 +109,7 @@
                             <div class="col-4">Capital City</div>
                             <div class="col-8">${Object.values(data.currencies[0].name)} (${Object.values(data.currencies).symbol})</div>
                         </div>
-                    </div>
-                </div>
-            </div>`;
+                    </div>`;
     // const html = `
     // <div class="col-3" style="width: 18rem;">
     //     <div class="card h-100">
@@ -116,6 +127,7 @@
     //     </div>
     // </div>
     // `;
+    document.querySelector("#details").style.opacity = 1;
     document.querySelector("#country-details").innerHTML = html;
     }
 
@@ -143,6 +155,9 @@
             ${err.message}
         </div>
         `;
+        setTimeout(function() {
+            document.querySelector("#errors").innerHTML ="";
+        },5000);
         document.querySelector("#errors").innerHTML = html;
     }
 
