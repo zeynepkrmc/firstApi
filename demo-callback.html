@@ -15,6 +15,7 @@
 <script>
     function displayCountry(country){
     const request = new XMLHttpRequest();
+    
     request.open('GET', 'https://restcountries.com/v3.1/name/' + country);
     request.send();
 
@@ -23,7 +24,7 @@
     const data = JSON.parse(this.responseText);
     console.log(data);
     console.log(typeof data);
-    setCountry(data[0]);
+    setCountry(data); //data[0]
 
 
 
@@ -32,26 +33,27 @@
     //load neighbours
     const req = new XMLHttpRequest();
     req.open('GET', 'https://restcountries.com/v3.1/alpha?codes=' + countries);
-
+    req.send();
 
     req.addEventListener('load', function(){
         const data = JSON.parse(this.responseText);
-        console.log(data);
+        setCountry(data);
     });
     });
     }
 function setCountry(data){
+    for(let country of data){
     const html = `
     <div class="col-3" style="width: 18rem;">
         <div class="card h-100">
-            <img src="${data.flags.png}" class="card-img-top" alt="...">
+            <img src="${country.flags.png}" class="card-img-top" alt="...">
             <div class="card-body">
-            <h5 class="card-title">Card title</h5>
+            <h5 class="card-title">${country.name.common}</h5>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Population: ${(data.population/1000000).toFixed(1)}</li>
-                <li class="list-group-item">Capital: ${data.capital[0]}</li>
-                <li class="list-group-item">Language: ${Object.values(data.languages)}</li>
+                <li class="list-group-item">Population: ${(country.population/1000000).toFixed(1)}</li>
+                <li class="list-group-item">Capital: ${country.capital[0]}</li>
+                <li class="list-group-item">Language: ${Object.values(country.languages)}</li>
             </ul>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             <a href="#" class="btn btn-primary">Go somewhere</a>
@@ -60,14 +62,11 @@ function setCountry(data){
     `;
     document.querySelector(".container.row").innerAdjacentHTML("beforeend", html);
 }
-
+}
 displayCountry("turkey");
 displayCountry("italy");
 
 
 </script>
-
-
-
 </body>
 </html>
