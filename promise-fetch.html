@@ -34,6 +34,7 @@
     </div>
 <!--xml, json-->
 
+
 <script>
 
     document.querySelector("#btnSearch").addEventListener("click", () => {
@@ -41,22 +42,25 @@
         getCountry(text);
     });
     
-    function getCountry(country){
-        fetch('https://restcountries.com/v3.1/name/' + country )
-        .then((response) => {
-            return response.json();
+    function getCountry(country){ 
+        fetch('https://restcountries.com/v3.1/name/' + country ) 
+
+
+        .then((response) => { // .then((response) => response.json())
+            return response.json(); 
         })
-        .then((data) => {
+
+        .then((data) => { 
             console.log
             renderCountry(data[0]);
             const countries = data[0].borders.toString();
 
             return fetch('https://restcountries.com/v3.1/alpha?codes=' + countries);
         })
-        .then(data => {
+        .then(data => { //.then(data => return response.json())
             return response.json(); //data to json data
         })
-        .then((data) => {
+        .then((data) => { //.then((data) => renderNeighbours(data))
             renderNeighbours(data); //coming data upload
         });
 
