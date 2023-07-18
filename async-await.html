@@ -39,10 +39,10 @@
             }, 1000)
         })
     }
-
+//Version of the job done in promise2.html using async await
     //sync 
     async function displayUser(){
-    try {
+    try { //server is offline catching
     const user = await login("USER","12345");
     console.log(user);
 
@@ -52,7 +52,7 @@
      const details = await getPostDetails(posts[0]);
      console.log(details);
     } catch(err){
-        console.log(err);
+      console.log(err);
     }
 }
 
