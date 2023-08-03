@@ -20,8 +20,8 @@
 
     //async
     request.addEventListener('load', function(){
-    const data = JSON.parse(this.responseText);
-    console.log(data);
+    const data = JSON.parse(this.responseText); //json info getting
+    console.log(data); 
     console.log(typeof data);
     
     setCountry(data[0]);
@@ -46,7 +46,7 @@ function setCountry(data){
         </div>
     </div>
     `;
-    document.querySelector(".container.row").innerAdjacentHTML("beforeend", html);
+    document.querySelector(".container .row").insertAdjacentHTML("beforeend", html);
 }
 
 displayCountry("turkey");
