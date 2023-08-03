@@ -20,7 +20,7 @@
         <div  id="errors"></div>
         <div class="card mb-3">
             <div class="card body">
-                <div class="input-group">
+                <div class="input-group">+
                     <input id="txtSearch" type="text" class="form-control">
                     <button id="btnSearch" type="button" class="btn btn-primary">Load</button>
                 </div>
@@ -107,7 +107,7 @@
                         </div>
                         <div class="row">
                             <div class="col-4">Capital City</div>
-                            <div class="col-8">${Object.values(data.currencies[0].name)} (${Object.values(data.currencies).symbol})</div>
+                            <div class="col-8">${Object.values(data.currencies)[0].name} (${Object.values(data.currencies)[0].symbol})</div>
                         </div>
                     </div>`;
     // const html = `
