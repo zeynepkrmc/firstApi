@@ -17,7 +17,7 @@
             <div class="card body">
                 <div class="input-group">
                     <input id="txtSearch" type="text" class="form-control">
-                    <button id="btnSearch" type="button" class="btn brn-primary">Load</button>
+                    <button id="btnSearch" type="button" class="btn btn-primary">Load</button> 
                 </div>
             </div>
         </div>
@@ -63,7 +63,7 @@
 <script>
 
     document.querySelector("#btnSearch").addEventListener("click", () => {
-        let text = document.querySelector("#txtSearch").value;
+        let text = document.querySelector("#txtSearch").value; //input box value info getting
         getCountry(text);
     });
     
@@ -121,8 +121,8 @@
                             <div class="col-8">${data.capital[0]}</div>
                         </div>
                         <div class="row">
-                            <div class="col-4">Capital City</div>
-                            <div class="col-8">${Object.values(data.currencies[0].name)} (${Object.values(data.currencies).symbol})</div>
+                            <div class="col-4">Money</div>
+                            <div class="col-8">${Object.values(data.currencies)[0].name} (${Object.values(data.currencies)[0].symbol})</div>
                         </div>
                     </div>
                 </div>
@@ -148,7 +148,7 @@
     }
 
     function renderNeighbours(data){
-        let html;
+        let html = "";
         for(let country of data){
             html += `
                 <div class="col-2 mt-2>
