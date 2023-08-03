@@ -27,7 +27,7 @@
 
 
 
-        const countries = data[0].borders.toString();
+    const countries = data[0].borders.toString();
 
     //load neighbours
     const req = new XMLHttpRequest();
@@ -59,11 +59,11 @@ function setCountry(data){
         </div>
     </div>
     `;
-    document.querySelector(".container.row").insertAdjacentHTML("beforeend", html);
+    document.querySelector(".container .row").insertAdjacentHTML("beforeend", html);
 }
 }
 displayCountry("turkey");
-displayCountry("italy");
+//displayCountry("italy");
 
 
 </script>
