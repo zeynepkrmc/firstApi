@@ -13,6 +13,7 @@
         #details {
             opacity: 0;
         }
+        
     </style>
 </head>
 <body>
@@ -29,7 +30,7 @@
                     
                 </div>
             </div>
-        </div>
+        </div>      
         <div class="details">
         <div class="card mb-3">
             <div class="card-header">Result of search</div>
@@ -153,7 +154,7 @@
                         </div>
                         <div class="row">
                             <div class="col-4">Capital City</div>
-                            <div class="col-8">${Object.values(data.currencies[0].name)} (${Object.values(data.currencies).symbol})</div>
+                            <div class="col-8">${Object.values(data.currencies)[0].name} (${Object.values(data.currencies)[0].symbol})</div>
                         </div>
                     </div>`;
     // const html = `
